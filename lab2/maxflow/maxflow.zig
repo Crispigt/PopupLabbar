@@ -189,8 +189,8 @@ pub fn max_flow(
     comptime T: type,
     edges: []const T,
     numNodes: usize,        
-    s: usize,                
-    t: usize,                
+    s: usize,
+    t: usize,
 ) ![]T {
     var graph = try Graph(T).init(allocator, numNodes);
     defer graph.deinit();
@@ -247,6 +247,8 @@ pub fn max_flow(
         }
     }
     try result.append(totFlow);
+    // [u,v,f, u1,v1,f1 ,..., totflow ]
+
 
     return result.toOwnedSlice();
 }

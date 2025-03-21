@@ -1,8 +1,8 @@
 
 /// Author: Felix Stenberg, Viktor Widin
-///
-
 const std = @import("std");
+
+
 
 /// Edge structure representing a directed edge in the graph.
 pub fn Edges(comptime T: type) type {
@@ -13,6 +13,7 @@ pub fn Edges(comptime T: type) type {
         reverse: *@This(),
     };
 }
+
 
 /// Represents a flow network graph.
 ///
@@ -165,6 +166,7 @@ pub fn bfs(
     return &[_]*Edges(T){};
 }
 
+
 /// Computes the maximum flow in a flow network using the Edmonds-Karp algorithm.
 /// 
 /// Parameters:
@@ -219,6 +221,7 @@ fn max_flow(
     }
 }
 
+
 /// Computes the minimum cut of a flow network after max flow has been computed.
 /// 
 /// Parameters:
@@ -260,6 +263,7 @@ pub fn min_cut(
     const mincut = try bfs_min_cut(allocator, T, &graph, s, t, numNodes);
     return mincut;
 }
+
 
 /// Performs a Breadth-First Search (BFS) on the residual graph to determine the minimum cut.
 ///
@@ -310,7 +314,7 @@ pub fn bfs_min_cut(
         for (neighbors.items) |*edge| {
             const residual_capacity = edge.capacity - edge.flow;
             const next = edge.pointer;
-            if (residual_capacity > 0  and !visit[next]) {
+            if (residual_capacity > 0 and !visit[next]) {
                 try U.append(@intCast(next));
                 visit[next] = true;
                 try queue.append(next);

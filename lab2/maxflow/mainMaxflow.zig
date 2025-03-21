@@ -11,9 +11,9 @@ pub fn readInput(allocator: std.mem.Allocator, reader: anytype) ![]u8 {
 fn parseAndRunCombined(allocator: std.mem.Allocator, comptime T: type, data: []u8) !void {
     var splitter = std.mem.splitAny(u8, data, " \n");
 
-    const N = try std.fmt.parseInt(usize, splitter.next().?, 10); // num nodes
+    const N = try std.fmt.parseInt(usize, splitter.next().?, 10);  // num nodes
     const M =  try std.fmt.parseInt(usize, splitter.next().?, 10); // edges
-    const s =  try std.fmt.parseInt(usize, splitter.next().?, 10);  // s is source
+    const s =  try std.fmt.parseInt(usize, splitter.next().?, 10); // s is source
     const t =  try std.fmt.parseInt(usize, splitter.next().?, 10); // sink
 
     // n: number of nodes, 0 to n-1 
