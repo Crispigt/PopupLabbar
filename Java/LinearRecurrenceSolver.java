@@ -1,3 +1,4 @@
+package Java;
 // Author: Felix Stenberg, Viktor Widin
 /**
 *

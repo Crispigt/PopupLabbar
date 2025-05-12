@@ -8,7 +8,7 @@
  *
  * @author Viktor Widin
  */
-package solutions;
+package Java;
 import java.math.*;
 import java.util.ArrayList;
 import java.util.Arrays;
