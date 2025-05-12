@@ -13,11 +13,11 @@ fn parseAndRunCombinedArray(allocator: std.mem.Allocator, data: []u8) !void {
         if (std.mem.eql(u8,token, "") or std.mem.eql(u8,token, "0")) {
             continue;
         }
+        // std.debug.print("\n new \n", .{});
 
         const n = try std.fmt.parseInt(usize, token, 10);
-
+        // std.debug.print("n:{d} \n", .{n});
         const points = try allocator.alloc(poly.point, n);
-
 
         for (0..n) |r| {
 
@@ -26,12 +26,25 @@ fn parseAndRunCombinedArray(allocator: std.mem.Allocator, data: []u8) !void {
             points[r] = .{.x=x, .y=y };
         }
 
-        const res = try poly.Convex_Hull(points, allocator);
+        const n2 = try std.fmt.parseInt(usize, splitter.next().?, 10);
+        // std.debug.print("n2:{d} \n", .{n2});
+        const res = try allocator.alloc(i32, n2);
+        for (0..n2) |value| {
+            const x = try std.fmt.parseFloat(f64, splitter.next().?);
+            const y = try std.fmt.parseFloat(f64, splitter.next().?);
+            const o = poly.inside_poly(.{.x=x, .y=y }, points);
+            res[value] = o;
+        }
+        // std.debug.print("\n res \n", .{});
 
-
-        try writer.print("{d}\n", .{res.len});        
         for (res) |value| {
-            try writer.print("{d} {d}\n", .{value.x, value.y});        
+            if (value == 1) {
+                try writer.print("in\n", .{});        
+            } else if (value == -1){
+                try writer.print("out\n", .{});        
+            } else {
+                try writer.print("on\n", .{});        
+            }
         }
     }
     

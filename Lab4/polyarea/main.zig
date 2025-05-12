@@ -1,5 +1,5 @@
 const std = @import("std");
-const polyArea = @import("polyArea.zig");
+const polyArea = @import("poly.zig");
 
 fn parseAndRunCombinedArray(allocator: std.mem.Allocator, data: []u8) !void {
     
